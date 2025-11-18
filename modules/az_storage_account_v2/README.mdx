@@ -10,11 +10,11 @@ Terraform module to create an Azure Storage Account with optional per-service Pr
 ## 2. Usage
 ```hcl
 module "region_abbreviations" {
-  source = "../region-abbreviations"
+  source = "git::https://github.com/geral-qempire/terraform-modules.git?ref=modules/az_region_abbreviations_v2/v1.0.0"
 }
 
 module "storage_account" {
-  source = "../storage-account"
+  source = "git::https://github.com/geral-qempire/terraform-modules.git?ref=modules/az_storage_account_v2/v1.0.0"
 
   environment          = "dev"
   service_prefix       = "acme"

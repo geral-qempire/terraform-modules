@@ -16,7 +16,7 @@ This module assigns multiple Azure RBAC roles to multiple principals by looking 
 
 ```hcl
 module "rbac_profile" {
-  source = "../az_rbac_profile_assignment"
+  source = "git::https://github.com/geral-qempire/terraform-modules.git?ref=modules/az_rbac_profile_assignment/v1.0.0"
 
   roles = [
     "Reader",
@@ -41,7 +41,7 @@ module "rbac_profile" {
 
 ```hcl
 module "rbac_profile" {
-  source = "../az_rbac_profile_assignment"
+  source = "git::https://github.com/geral-qempire/terraform-modules.git?ref=modules/az_rbac_profile_assignment/v1.0.0"
 
   roles = [
     "Reader",
@@ -76,7 +76,7 @@ module "rbac_profile" {
 
 ```hcl
 module "rbac_profile" {
-  source = "../az_rbac_profile_assignment"
+  source = "git::https://github.com/geral-qempire/terraform-modules.git?ref=modules/az_rbac_profile_assignment/v1.0.0"
 
   roles = ["Reader"]
 

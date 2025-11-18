@@ -10,11 +10,11 @@ Create a single Azure Monitor Action Group with multiple email receivers using c
 ## 2. Usage
 ```hcl
 module "region_abbreviations" {
-  source = "../region-abbreviations"
+  source = "git::https://github.com/geral-qempire/terraform-modules.git?ref=modules/az_region_abbreviations_v2/v1.0.0"
 }
 
 module "action_group" {
-  source = "../action-group-map"
+  source = "git::https://github.com/geral-qempire/terraform-modules.git?ref=modules/az_action_group_map/v1.0.0"
 
   environment          = "dev"
   service_prefix       = "acme"

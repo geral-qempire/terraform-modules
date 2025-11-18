@@ -120,7 +120,7 @@ locals {
 ########################################
 
 module "rbac_assignments" {
-  source = "../az_role_assignment"
+  source = "git::https://github.com/geral-qempire/terraform-modules.git?ref=modules/az_role_assignment/v1.0.0"
 
   rbac                           = local.rbac_assignments
   skip_service_principal_aad_check = var.skip_service_principal_aad_check

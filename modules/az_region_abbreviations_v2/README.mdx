@@ -10,7 +10,7 @@ Expose a canonical map of Azure region names (canonical and display forms) to sh
 ## 2. Usage
 ```hcl
 module "region_abbreviations" {
-  source = "../region-abbreviations"
+  source = "git::https://github.com/geral-qempire/terraform-modules.git?ref=modules/az_region_abbreviations_v2/v1.0.0"
 }
 
 locals {

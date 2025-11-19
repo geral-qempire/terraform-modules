@@ -48,4 +48,20 @@ resource "azurerm_storage_account" "this" {
   }
 }
 
+resource "azapi_update_resource" "geo_priority_replication" {
+  count       = var.enable_geo_priority_replication ? 1 : 0
+  type        = "Microsoft.Storage/storageAccounts@2024-01-01"
+  resource_id = azurerm_storage_account.this.id
+
+  body = {
+    properties = {
+      geoPriorityReplicationStatus = {
+        isBlobEnabled = true
+      }
+    }
+  }
+
+  depends_on = [azurerm_storage_account.this]
+}
+
 

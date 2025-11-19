@@ -71,6 +71,12 @@ variable "infrastructure_encryption_enabled" {
   description = "Enables infrastructure encryption."
 }
 
+variable "enable_geo_priority_replication" {
+  type        = bool
+  default     = false
+  description = "Enables Geo Priority Replication for blob storage via AzAPI."
+}
+
 variable "enable_private_endpoint_blob" {
   type        = bool
   default     = true

@@ -30,6 +30,7 @@ module "storage_account" {
   public_network_access_enabled     = false
   shared_access_key_enabled         = true
   infrastructure_encryption_enabled = false
+  enable_geo_priority_replication   = true
 
   # Network Rules
   network_rules_default_action = "Deny"
@@ -122,6 +123,7 @@ The module includes integrated monitoring alerts for Storage Account metrics:
 | `public_network_access_enabled` | `bool` | `false` | no | Allow public network access. |
 | `shared_access_key_enabled` | `bool` | `true` | no | Enable shared access keys. |
 | `infrastructure_encryption_enabled` | `bool` | `false` | no | Enable infrastructure encryption. |
+| `enable_geo_priority_replication` | `bool` | `false` | no | Toggle Geo Priority Replication for blob storage using AzAPI. |
 | `network_rules_default_action` | `string` | `"Deny"` | no | Default network action (`Allow`, `Deny`). |
 | `network_rules_bypass` | `list(string)` | `["AzureServices"]` | no | Services that can bypass storage network rules (`AzureServices`, `Logging`, `Metrics`). |
 | `enable_private_endpoint_*` | `bool` | varies | no | Enable per-service Private Endpoints. |
@@ -151,6 +153,7 @@ The module includes integrated monitoring alerts for Storage Account metrics:
 ## 5. Requirements
 - Terraform `>= 1.12.1`
 - AzureRM provider `>= 4.38.1`
+- AzAPI provider `>= 1.13.1`
 - Existing Resource Group
 
 

@@ -116,13 +116,15 @@ locals {
 }
 
 ########################################
-# Module - RBAC Role Assignments
+# RBAC Role Assignments
 ########################################
 
-module "rbac_assignments" {
-  source = "git::https://github.com/geral-qempire/terraform-modules.git?ref=modules/az_role_assignment/v1.0.0"
-
-  rbac                           = local.rbac_assignments
+resource "azurerm_role_assignment" "this" {
+  for_each                         = local.rbac_assignments
+  scope                            = each.value.scope
+  role_definition_name             = each.value.role_definition_name
+  principal_id                     = each.value.principal_id
+  principal_type                   = each.value.principal_type
   skip_service_principal_aad_check = var.skip_service_principal_aad_check
 }
 

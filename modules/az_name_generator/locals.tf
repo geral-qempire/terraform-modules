@@ -1,4 +1,5 @@
 locals {
+  # Map of Azure locations to their abbreviations (same as az_region_abbreviations_v2)
   regions = {
     "australiacentral"     = "acl"
     "Australia Central"    = "acl"
@@ -149,6 +150,37 @@ locals {
     "germanynortheast"     = "gne"
     "Germany North East"   = "gne"
   }
+
+  # Sanitize resource type abbreviation (convert to lowercase)
+  resource_abbreviation = lower(var.resource_type)
+
+  # Get location abbreviation
+  # Maps full location names (e.g., "northeurope", "North Europe") to abbreviations (e.g., "ne")
+  # If the location is not found in the map, it's used as-is (assumed to already be an abbreviation)
+  location_abbreviation = lookup(
+    local.regions,
+    var.location,
+    lower(replace(replace(var.location, " ", ""), "-", ""))
+  )
+
+  # Sanitize project name (remove hyphens and underscores, convert to lowercase)
+  sanitized_project_name = lower(replace(replace(var.project_name, "-", ""), "_", ""))
+
+  # Sanitize environment (convert to lowercase)
+  sanitized_environment = lower(var.environment)
+
+  # Build name parts
+  name_parts = compact([
+    local.resource_abbreviation,
+    local.location_abbreviation,
+    var.org_code != null ? lower(var.org_code) : null,
+    local.sanitized_project_name,
+    local.sanitized_environment,
+    var.random_postfix ? random_string.postfix[0].result : null
+  ])
+
+  # Generate the final name
+  generated_name = var.merged ? join("", local.name_parts) : join("-", local.name_parts)
 }
 
 

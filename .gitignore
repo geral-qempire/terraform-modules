@@ -33,3 +33,5 @@ terraform.rc
 *.backup
 *.bak
 
+# Local deployment test scaffolding
+deployment-tests/

@@ -32,7 +32,7 @@ locals {
   # Check if ServicePrincipal name is a GUID (principal_id already provided)
   sp_is_principal_id = {
     for idx, principal in var.principals : idx => (
-      principal.type == "ServicePrincipal" && 
+      principal.type == "ServicePrincipal" &&
       can(regex("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", lower(principal.name)))
     )
   }
@@ -51,16 +51,16 @@ data "azuread_service_principal" "service_principals" {
 locals {
   managed_identity_parts = {
     for idx, principal in var.principals : idx => {
-      resource_id       = principal.name
-      resource_group    = regex("/resourceGroups/([^/]+)/", principal.name)[0]
-      identity_name     = regex("/userAssignedIdentities/([^/]+)$", principal.name)[0]
+      resource_id    = principal.name
+      resource_group = regex("/resourceGroups/([^/]+)/", principal.name)[0]
+      identity_name  = regex("/userAssignedIdentities/([^/]+)$", principal.name)[0]
     }
     if principal.type == "ManagedIdentity"
   }
 }
 
 data "azurerm_user_assigned_identity" "managed_identities" {
-  for_each = local.managed_identity_parts
+  for_each            = local.managed_identity_parts
   name                = each.value.identity_name
   resource_group_name = each.value.resource_group
 }
@@ -77,7 +77,7 @@ locals {
         principal.type == "Group" ? data.azuread_group.groups[idx].object_id : (
           principal.type == "ServicePrincipal" ? (
             local.sp_is_principal_id[idx] ? principal.name : data.azuread_service_principal.service_principals[idx].object_id
-          ) : (
+            ) : (
             principal.type == "ManagedIdentity" ? data.azurerm_user_assigned_identity.managed_identities[idx].principal_id : null
           )
         )
@@ -106,10 +106,10 @@ locals {
           }
         ]
       ] if principal_id != null
-    ]) : pair.key => {
+      ]) : pair.key => {
       scope                = pair.scope
       principal_id         = pair.principal_id
-      principal_type      = pair.principal_type
+      principal_type       = pair.principal_type
       role_definition_name = pair.role
     }
   }

@@ -86,11 +86,11 @@ resource "azurerm_storage_management_policy" "this" {
         dynamic "base_blob" {
           for_each = lookup(rule.value.actions, "base_blob", null) != null ? [lookup(rule.value.actions, "base_blob", null)] : []
           content {
-            auto_tier_to_hot_from_cool_enabled                          = lookup(base_blob.value, "auto_tier_to_hot_from_cool_enabled", false)
-            tier_to_cool_after_days_since_last_access_time_greater_than = lookup(base_blob.value, "tier_to_cool_after_days_since_last_access_time_greater_than", null)
-            tier_to_cold_after_days_since_last_access_time_greater_than = lookup(base_blob.value, "tier_to_cold_after_days_since_last_access_time_greater_than", null)
+            auto_tier_to_hot_from_cool_enabled                             = lookup(base_blob.value, "auto_tier_to_hot_from_cool_enabled", false)
+            tier_to_cool_after_days_since_last_access_time_greater_than    = lookup(base_blob.value, "tier_to_cool_after_days_since_last_access_time_greater_than", null)
+            tier_to_cold_after_days_since_last_access_time_greater_than    = lookup(base_blob.value, "tier_to_cold_after_days_since_last_access_time_greater_than", null)
             tier_to_archive_after_days_since_last_access_time_greater_than = lookup(base_blob.value, "tier_to_archive_after_days_since_last_access_time_greater_than", null)
-            delete_after_days_since_last_access_time_greater_than       = lookup(base_blob.value, "delete_after_days_since_last_access_time_greater_than", null)
+            delete_after_days_since_last_access_time_greater_than          = lookup(base_blob.value, "delete_after_days_since_last_access_time_greater_than", null)
           }
         }
       }

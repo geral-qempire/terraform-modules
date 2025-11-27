@@ -18,7 +18,7 @@ variable "subnet_id" {
   description = "Subnet ID where private endpoint will be deployed."
   default     = null
   validation {
-    condition = var.subnet_id != null || (var.subnet_name != null && var.virtual_network_name != null)
+    condition     = var.subnet_id != null || (var.subnet_name != null && var.virtual_network_name != null)
     error_message = "Provide subnet_id or both subnet_name and virtual_network_name."
   }
 }

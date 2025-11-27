@@ -4,9 +4,9 @@ locals {
 
 resource "azurerm_monitor_action_group" "this" {
   name                = var.name
-  resource_group_name  = var.resource_group_name
-  short_name           = local.action_group_short_name
-  enabled              = var.enabled
+  resource_group_name = var.resource_group_name
+  short_name          = local.action_group_short_name
+  enabled             = var.enabled
 
   dynamic "email_receiver" {
     for_each = var.email_receivers

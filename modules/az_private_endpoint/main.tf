@@ -25,7 +25,7 @@ data "azurerm_private_dns_zone" "this" {
 
 # Private endpoint resource
 resource "azurerm_private_endpoint" "this" {
-  location                      = var.private_endpoint_location != "" ? var.private_endpoint_location : var.location
+  location                      = var.private_endpoint_location != null ? var.private_endpoint_location : var.location
   name                          = var.name
   resource_group_name           = var.resource_group_name
   subnet_id                     = local.resolved_subnet_id

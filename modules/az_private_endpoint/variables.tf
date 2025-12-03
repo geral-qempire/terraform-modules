@@ -77,7 +77,7 @@ variable "tags" {
 
 variable "private_endpoint_location" {
   type        = string
-  description = "Location to deploy Private Endpoint. If empty, falls back to module location."
-  default     = ""
+  description = "Location to deploy Private Endpoint. If null, falls back to module location."
+  default     = null
 }
 

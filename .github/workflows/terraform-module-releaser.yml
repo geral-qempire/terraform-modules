@@ -22,7 +22,8 @@ jobs:
         with:
           module-asset-exclude-patterns: "*terraform.tfvars,**/tests/**"
           module-change-exclude-patterns: "*terraform.tfvars,**/tests/**"
-          module-path-ignore: "**/tests/**"
+          module-path-ignore: "modules/*/tests,modules/*/tests/**"
+
         # Optional customisation:
         #   default-first-tag: "v1.0.0"
         #   major-keywords: "breaking change,major"

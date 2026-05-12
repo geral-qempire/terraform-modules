@@ -42,3 +42,9 @@ variable "is_shared_to_all" {
   type        = bool
   default     = true
 }
+
+variable "locks" {
+  description = "List of resource IDs to lock during creation/update/deletion to serialise operations."
+  type        = list(string)
+  default     = []
+}

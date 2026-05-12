@@ -3,6 +3,7 @@ resource "azapi_resource" "this" {
   name                      = var.name
   parent_id                 = var.workspace_id
   schema_validation_enabled = false
+  locks                     = var.locks
 
   body = {
     properties = {

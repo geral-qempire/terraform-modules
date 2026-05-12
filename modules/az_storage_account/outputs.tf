@@ -1,36 +1,19 @@
-output "storage_account_id" {
+output "id" {
+  description = "Resource ID of the storage account."
   value       = azurerm_storage_account.this.id
-  description = "The ID of the Storage Account."
 }
 
-output "storage_account_name" {
+output "name" {
+  description = "Name of the storage account."
   value       = azurerm_storage_account.this.name
-  description = "The Name of the Storage Account."
 }
 
-output "storage_account_primary_access_key" {
-  value       = azurerm_storage_account.this.primary_access_key
-  description = "Primary access key for the Storage Account."
-  sensitive   = true
-}
-
-output "storage_account_primary_blob_endpoint" {
+output "primary_blob_endpoint" {
+  description = "Primary blob service endpoint URL."
   value       = azurerm_storage_account.this.primary_blob_endpoint
-  description = "Primary Blob service endpoint for the Storage Account."
 }
 
-output "storage_account_primary_file_endpoint" {
-  value       = azurerm_storage_account.this.primary_file_endpoint
-  description = "Primary File service endpoint for the Storage Account."
+output "principal_id" {
+  description = "Principal ID of the system-assigned managed identity."
+  value       = azurerm_storage_account.this.identity[0].principal_id
 }
-
-output "storage_account_primary_queue_endpoint" {
-  value       = azurerm_storage_account.this.primary_queue_endpoint
-  description = "Primary Queue service endpoint for the Storage Account."
-}
-
-output "storage_account_primary_table_endpoint" {
-  value       = azurerm_storage_account.this.primary_table_endpoint
-  description = "Primary Table service endpoint for the Storage Account."
-}
-

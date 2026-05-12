@@ -34,10 +34,15 @@ variable "container_registry_id" {
   default     = null
 }
 
-variable "public_network_access_enabled" {
-  description = "Whether public network access is allowed."
-  type        = bool
-  default     = true
+variable "public_network_access" {
+  description = "Whether public network access is allowed. Possible values: Enabled, Disabled."
+  type        = string
+  default     = "Enabled"
+
+  validation {
+    condition     = contains(["Enabled", "Disabled"], var.public_network_access)
+    error_message = "Must be one of: Enabled, Disabled."
+  }
 }
 
 variable "managed_network_isolation_mode" {

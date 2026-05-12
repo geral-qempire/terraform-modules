@@ -8,7 +8,7 @@ resource "azurerm_ai_foundry" "this" {
   container_registry_id   = var.container_registry_id
   public_network_access   = var.public_network_access
   friendly_name           = var.friendly_name != "" ? var.friendly_name : var.name
-  description             = var.description
+  description             = var.description != "" ? var.description : null
 
   managed_network {
     isolation_mode = var.managed_network_isolation_mode

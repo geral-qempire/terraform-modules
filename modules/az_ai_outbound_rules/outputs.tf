@@ -1,9 +1,9 @@
-output "fqdn_rule_names" {
-  description = "Names of the FQDN outbound rules created."
-  value       = keys(local.fqdn_outbound_rules)
+output "fqdn_rule_ids" {
+  description = "Map of FQDN outbound rule IDs."
+  value       = { for k, v in azurerm_machine_learning_workspace_network_outbound_rule_fqdn.this : k => v.id }
 }
 
 output "pe_rule_ids" {
-  description = "Resource IDs of the private endpoint outbound rules."
-  value       = [for r in azapi_resource.pe_rules : r.id]
+  description = "Map of private endpoint outbound rule IDs."
+  value       = { for k, v in azurerm_machine_learning_workspace_network_outbound_rule_private_endpoint.this : k => v.id }
 }

@@ -5,5 +5,5 @@ output "fqdn_rule_ids" {
 
 output "pe_rule_ids" {
   description = "Map of private endpoint outbound rule IDs."
-  value       = { for k, v in azurerm_machine_learning_workspace_network_outbound_rule_private_endpoint.this : k => v.id }
+  value       = { for k, v in azapi_resource.pe_rules : k => v.id }
 }

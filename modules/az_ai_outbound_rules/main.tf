@@ -1,13 +1,29 @@
 ########################################
-# FQDN outbound rules (native azurerm)
+# FQDN outbound rules (sequential with 2s delay)
+# Azure deletes rules when created in parallel,
+# so we chain them: time_sleep[N] -> fqdn[N] -> time_sleep[N+1] -> fqdn[N+1]
 ########################################
 
-resource "azurerm_machine_learning_workspace_network_outbound_rule_fqdn" "this" {
-  for_each = toset(var.fqdn_rules)
+locals {
+  fqdn_list = var.fqdn_rules
+}
 
-  name             = "fqdn-${replace(each.value, "/[^A-Za-z0-9]/", "-")}"
+resource "time_sleep" "fqdn_delay" {
+  count           = length(local.fqdn_list)
+  create_duration = count.index > 0 ? "2s" : "0s"
+
+  triggers = {
+    fqdn     = local.fqdn_list[count.index]
+    after_id = count.index > 0 ? azurerm_machine_learning_workspace_network_outbound_rule_fqdn.this[count.index - 1].id : ""
+  }
+}
+
+resource "azurerm_machine_learning_workspace_network_outbound_rule_fqdn" "this" {
+  count = length(local.fqdn_list)
+
+  name             = "fqdn-${replace(local.fqdn_list[count.index], "/[^A-Za-z0-9]/", "-")}"
   workspace_id     = var.workspace_id
-  destination_fqdn = each.value
+  destination_fqdn = time_sleep.fqdn_delay[count.index].triggers["fqdn"]
 }
 
 ########################################

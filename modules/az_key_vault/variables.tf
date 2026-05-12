@@ -1,5 +1,5 @@
 variable "name" {
-  description = "Name of the key vault. Must be globally unique, 3-24 chars."
+  description = "Base name of the key vault. A 4-char random suffix is appended automatically. Max 20 chars."
   type        = string
 }
 

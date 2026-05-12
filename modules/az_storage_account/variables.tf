@@ -1,10 +1,10 @@
 variable "name" {
-  description = "Name of the storage account. Must be globally unique, 3-24 chars, lowercase alphanumeric only."
+  description = "Base name of the storage account. A 4-char random suffix is appended automatically. Lowercase alphanumeric only, max 20 chars."
   type        = string
 
   validation {
-    condition     = can(regex("^[a-z0-9]{3,24}$", var.name))
-    error_message = "Storage account name must be 3-24 characters, lowercase letters and numbers only."
+    condition     = can(regex("^[a-z0-9]{3,20}$", var.name))
+    error_message = "Storage account base name must be 3-20 characters (4-char suffix is appended), lowercase letters and numbers only."
   }
 }
 

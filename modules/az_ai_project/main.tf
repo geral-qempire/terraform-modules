@@ -5,14 +5,15 @@ resource "azapi_resource" "this" {
   parent_id                 = var.resource_group_id
   schema_validation_enabled = false
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   body = {
     kind = "Project"
-    identity = {
-      type = "SystemAssigned"
-    }
     properties = {
-      friendlyName = var.friendly_name != "" ? var.friendly_name : var.name
-      description  = var.description
+      friendlyName  = var.friendly_name != "" ? var.friendly_name : var.name
+      description   = var.description
       hubResourceId = var.hub_workspace_id
     }
   }

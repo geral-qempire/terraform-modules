@@ -31,6 +31,24 @@ variable "target" {
   type        = string
 }
 
+variable "auth_type" {
+  description = "Authentication type: AAD (Entra ID / RBAC) or ApiKey."
+  type        = string
+  default     = "AAD"
+
+  validation {
+    condition     = contains(["AAD", "ApiKey"], var.auth_type)
+    error_message = "Must be AAD or ApiKey."
+  }
+}
+
+variable "credentials_key" {
+  description = "API key for ApiKey auth type. Required when auth_type = ApiKey."
+  type        = string
+  default     = null
+  sensitive   = true
+}
+
 variable "metadata" {
   description = "Optional metadata key-value pairs for the connection."
   type        = map(string)

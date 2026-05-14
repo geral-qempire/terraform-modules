@@ -6,12 +6,19 @@ resource "azapi_resource" "this" {
   locks                     = var.locks
 
   body = {
-    properties = {
-      authType      = "AAD"
-      category      = var.category
-      target        = var.target
-      metadata      = var.metadata
-      isSharedToAll = var.is_shared_to_all
-    }
+    properties = merge(
+      {
+        authType      = var.auth_type
+        category      = var.category
+        target        = var.target
+        metadata      = var.metadata
+        isSharedToAll = var.is_shared_to_all
+      },
+      var.auth_type == "ApiKey" ? {
+        credentials = {
+          key = var.credentials_key
+        }
+      } : {}
+    )
   }
 }

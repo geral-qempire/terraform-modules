@@ -1,6 +1,6 @@
 output "fqdn_rule_ids" {
-  description = "List of FQDN outbound rule IDs."
-  value       = azurerm_machine_learning_workspace_network_outbound_rule_fqdn.this[*].id
+  description = "Map of FQDN outbound rule IDs."
+  value       = { for k, v in azapi_resource.fqdn_rules : k => v.id }
 }
 
 output "pe_rule_ids" {

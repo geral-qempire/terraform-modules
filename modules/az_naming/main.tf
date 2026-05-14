@@ -44,7 +44,7 @@ locals {
     sql_database     = "sqldb-${local.prefix}-${local.name_suffix}"
     app_insights     = "appi-${local.name_suffix}"
     log_analytics    = "log-${local.name_suffix}"
-    ai_services      = var.ai_services_name_override != "" ? var.ai_services_name_override : "cog-${local.name_suffix}"
+    ai_services      = var.ai_services_name_override != "" ? var.ai_services_name_override : "cog-${local.prefix}-${local.name_suffix}"
     vnet             = "vnet-${local.prefix}-${local.name_suffix}"
     subnet_pe        = "snet-pe-${local.prefix}-${local.name_suffix}"
   }
